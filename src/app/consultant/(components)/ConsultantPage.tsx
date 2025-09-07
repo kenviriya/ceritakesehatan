@@ -15,6 +15,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import type {Consultant} from '@/data/consultants';
+import {trackWhatsAppClick} from '@/lib/gtm';
 
 // ---- TikTok SVG (same shape you use on YenYen page)
 const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -130,7 +131,13 @@ export default function ConsultantPage({c}: Props) {
                 whileTap="whileTap"
                 className="mt-6 inline-flex w-full sm:w-auto"
               >
-                <Link href={waHref} className="flex w-full justify-center">
+                <Link
+                  href={waHref}
+                  className="flex w-full justify-center"
+                  onClick={() =>
+                    trackWhatsAppClick(c.phone, `consultant_${c.name}`)
+                  }
+                >
                   <Button className="h-14 w-full rounded-2xl bg-[#25D366] px-6 text-lg font-bold text-white shadow-lg shadow-[#25D366]/50 hover:bg-[#20ba57] sm:w-auto sm:text-base sm:font-semibold">
                     <Phone className="mr-2 size-6" /> Chat WhatsApp
                   </Button>
@@ -257,7 +264,13 @@ export default function ConsultantPage({c}: Props) {
             variants={pop}
             className="mt-5 flex w-full justify-center"
           >
-            <Link href={waHref} className="w-full sm:w-auto">
+            <Link
+              href={waHref}
+              className="w-full sm:w-auto"
+              onClick={() =>
+                trackWhatsAppClick(c.phone, `consultant_secondary_${c.name}`)
+              }
+            >
               <Button className="h-14 w-full rounded-2xl bg-[#25D366] px-6 text-lg font-bold text-white shadow-lg shadow-[#25D366]/50 hover:bg-[#20ba57] sm:w-auto sm:text-base sm:font-semibold">
                 <Phone className="mr-2 size-6" /> Chat WhatsApp Sekarang
               </Button>
