@@ -28,7 +28,7 @@ export const consultants: Consultant[] = [
   {
     slug: 'lilianda',
     name: 'Lilianda',
-    phone: '6285121098889',
+    phone: '6285121068889',
     title: 'Konsultan Resmi',
     photo: profileLilianda,
     location: 'Pakuwon Tower, Jakarta',
