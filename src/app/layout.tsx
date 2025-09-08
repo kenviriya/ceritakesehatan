@@ -20,7 +20,6 @@ export const metadata: Metadata = {
 };
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function RootLayout({
   children,
@@ -40,8 +39,8 @@ export default function RootLayout({
         />
         {/* GA4 */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-E0RRKTX5YK`}
+          strategy="beforeInteractive"
         />
         <Script
           id="ga4-script"
@@ -51,7 +50,7 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${GA_ID}');
+              gtag('config', 'G-E0RRKTX5YK');
             `,
           }}
         />
