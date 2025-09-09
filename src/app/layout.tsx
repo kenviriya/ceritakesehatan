@@ -28,8 +28,41 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      {/* GTM Tag */}
       <head>
+        {/* Tiktok Pixel */}
+        <Script
+          id="tiktok-pixel"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+                    !function (w, d, t) {
+                      w.TiktokAnalyticsObject = t;
+                      var ttq = w[t] = w[t] || [];
+                      ttq.methods = ["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
+                      ttq.setAndDefer = function(obj, method) {
+                        obj[method] = function(){ obj.push([method].concat([].slice.call(arguments,0))) }
+                      };
+                      for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
+                      ttq.instance = function(id){
+                        var inst = ttq._i[id] || [];
+                        for (var n = 0; n < ttq.methods.length; n++) ttq.setAndDefer(inst, ttq.methods[n]);
+                        return inst
+                      };
+                      ttq.load = function(id, opts){
+                        var url = "https://analytics.tiktok.com/i18n/pixel/events.js";
+                        ttq._i = ttq._i || {}; ttq._i[id] = []; ttq._i[id]._u = url;
+                        ttq._t = ttq._t || {}; ttq._t[id] = +new Date; ttq._o = ttq._o || {}; ttq._o[id] = opts || {};
+                        var s = d.createElement("script"); s.type = "text/javascript"; s.async = true;
+                        s.src = url + "?sdkid=" + id + "&lib=" + t;
+                        var e = d.getElementsByTagName("script")[0]; e.parentNode.insertBefore(s, e);
+                      };
+                      ttq.load('${process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID}');
+                      ttq.page();
+                    }(window, document, 'ttq');`,
+          }}
+        />
+
+        {/* GTM Tag */}
         <Script
           id="gtm-script"
           strategy="beforeInteractive"
